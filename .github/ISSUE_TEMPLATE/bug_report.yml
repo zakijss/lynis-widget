@@ -1,0 +1,26 @@
+name: Bug report
+description: Something doesn't work as the README says
+labels: [bug]
+body:
+  - type: textarea
+    attributes:
+      label: What happened
+      description: What you did, what you expected, and what you got instead.
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: Steps to reproduce
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: Environment
+      description: Please give the lynis-widget and Lynis versions, the dashboard (Dynacat or Glance) and its version, and whether the server runs as a systemd unit or in Podman.
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: Logs or output
+      description: Remove host names, addresses and tokens before pasting.
+      render: text

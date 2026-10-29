@@ -1,0 +1,12 @@
+# Runs Lynis, then writes the widget's summary. systemd finds lynis on its
+# usual PATH (/usr/local/sbin, /usr/local/bin, /usr/sbin, /usr/bin); for a
+# Lynis run from a git checkout, give the full path instead.
+[Unit]
+Description=Lynis audit, then the widget's summary
+
+[Service]
+Type=oneshot
+Nice=10
+IOSchedulingClass=idle
+ExecStart=lynis audit system --cronjob --quiet
+ExecStartPost=/usr/local/bin/lynis_widget.py summarize

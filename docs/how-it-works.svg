@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 320" width="900" height="320" role="img" aria-label="lynis-widget data flow: Lynis runs as root on each host, summarize writes a JSON summary, serve reads the summaries and answers the Dynacat or Glance card">
+<style>
+text{font:14px -apple-system,"Segoe UI",Helvetica,Arial,sans-serif;fill:#1f2328}
+.s{font-size:12px;fill:#59636e}.h{font-weight:600}
+.b{fill:none;stroke:#8c959f;stroke-width:1.5}.a{fill:none;stroke:#0969da;stroke-width:2}.k{fill:none;stroke:#0969da;stroke-width:1.5;stroke-dasharray:6 5}
+.c{fill:#0969da;fill-opacity:.08;stroke:#0969da;stroke-width:1.5}.m{fill:#0969da}.t{fill:#0969da;font-size:12px;font-weight:600;letter-spacing:.06em}
+@media (prefers-color-scheme:dark){text{fill:#e6edf3}.s{fill:#9198a1}.b{stroke:#6e7681}.a,.k{stroke:#4493f8}.c{fill:#4493f8;stroke:#4493f8;fill-opacity:.12}.m,.t{fill:#4493f8}}
+</style>
+<defs><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path class="m" d="M0 0L10 5L0 10z"/></marker></defs>
+<text class="t" x="20" y="30">EACH AUDITED HOST, AS ROOT</text>
+<rect class="b" x="20" y="48" width="170" height="64" rx="8"/><text class="h" x="36" y="74">Lynis audit</text><text class="s" x="36" y="94">weekly timer</text>
+<path class="a" d="M190 80L226 80" marker-end="url(#ar)"/>
+<rect class="b" x="230" y="48" width="170" height="64" rx="8"/><text class="h" x="246" y="74">report.dat</text><text class="s" x="246" y="94">root-only</text>
+<path class="a" d="M400 80L436 80" marker-end="url(#ar)"/>
+<rect class="c" x="440" y="48" width="170" height="64" rx="10"/><text class="h" x="456" y="74">summarize</text><text class="s" x="456" y="94">copies what the card shows</text>
+<path class="a" d="M610 80L646 80" marker-end="url(#ar)"/>
+<rect class="b" x="650" y="48" width="230" height="64" rx="8"/><text class="h" x="666" y="74">&lt;host&gt;-&lt;date&gt;.json</text><text class="s" x="666" y="94">readable by anyone, 12 kept</text>
+<path class="a" d="M765 112L765 178" marker-end="url(#ar)"/>
+<text class="s" x="755" y="150" text-anchor="end">other hosts rsync theirs here</text>
+<text class="t" x="20" y="166">DASHBOARD HOST, UNPRIVILEGED</text>
+<rect class="b" x="650" y="182" width="230" height="64" rx="8"/><text class="h" x="666" y="208">Summaries folder</text><text class="s" x="666" y="228">one or many hosts</text>
+<path class="a" d="M650 214L614 214" marker-end="url(#ar)"/>
+<rect class="c" x="440" y="182" width="170" height="64" rx="10"/><text class="h" x="456" y="208">serve</text><text class="s" x="456" y="228">127.0.0.1:8121, read only</text>
+<path class="a" d="M440 214L404 214" marker-end="url(#ar)"/>
+<rect class="b" x="230" y="182" width="170" height="64" rx="8"/><text class="h" x="246" y="208">HTML fragment</text><text class="s" x="246" y="228">escaped, one card per host</text>
+<path class="a" d="M230 214L194 214" marker-end="url(#ar)"/>
+<rect class="b" x="20" y="182" width="170" height="64" rx="8"/><text class="h" x="36" y="208">Dynacat or Glance</text><text class="s" x="36" y="228">extension widget</text>
+<text class="s" x="450" y="296" text-anchor="middle">The server never reads the root-only report, only the summaries.</text>
+</svg>

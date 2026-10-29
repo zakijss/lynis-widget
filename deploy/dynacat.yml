@@ -1,0 +1,8 @@
+# Add to a page's widgets in dynacat.yml (Glance uses the same block).
+- type: extension
+  url: http://127.0.0.1:8121/
+  allow-potentially-dangerous-html: true
+  cache: 5m
+  # if the server sets LYNIS_WIDGET_TOKEN:
+  # headers:
+  #   Authorization: Bearer ${LYNIS_WIDGET_TOKEN}

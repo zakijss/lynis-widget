@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="640" viewBox="0 0 1280 640">
+<!-- lynis-widget banner. Icons: "shield" and "verified_user", Material Symbols Outlined, Google, Apache License 2.0. Render: rsvg-convert -o banner.png banner.svg -->
+<defs><symbol id="s" viewBox="0 -960 960 960" width="64" height="64"><path d="M480-80q-139-35-229.5-159.5T160-516v-244l320-120 320 120v244q0 152-90.5 276.5T480-80Zm0-84q104-33 172-132t68-220v-189l-240-90-240 90v189q0 121 68 220t172 132Zm0-316Z"/></symbol></defs>
+<rect width="1280" height="640" fill="#14161a"/>
+<use href="#s" x="752" y="44" width="56" height="56" fill="#2a2e36" fill-opacity="1"/>
+<use href="#s" x="832" y="44" width="56" height="56" fill="#2a2e36" fill-opacity="1"/>
+<use href="#s" x="912" y="44" width="56" height="56" fill="#2a2e36" fill-opacity="1"/>
+<use href="#s" x="992" y="44" width="56" height="56" fill="#2a2e36" fill-opacity="1"/>
+<use href="#s" x="1072" y="44" width="56" height="56" fill="#2a2e36" fill-opacity="1"/>
+<use href="#s" x="1152" y="44" width="56" height="56" fill="#2a2e36" fill-opacity="1"/>
+<use href="#s" x="752" y="124" width="56" height="56" fill="#63c383" fill-opacity="0.6"/>
+<use href="#s" x="832" y="124" width="56" height="56" fill="#2a2e36" fill-opacity="1"/>
+<use href="#s" x="912" y="124" width="56" height="56" fill="#2a2e36" fill-opacity="1"/>
+<use href="#s" x="992" y="124" width="56" height="56" fill="#2a2e36" fill-opacity="1"/>
+<use href="#s" x="1072" y="124" width="56" height="56" fill="#2a2e36" fill-opacity="1"/>
+<use href="#s" x="1152" y="124" width="56" height="56" fill="#63c383" fill-opacity="0.6"/>
+<use href="#s" x="752" y="204" width="56" height="56" fill="#2a2e36" fill-opacity="1"/>
+<use href="#s" x="832" y="204" width="56" height="56" fill="#2a2e36" fill-opacity="1"/>
+<use href="#s" x="912" y="204" width="56" height="56" fill="#2a2e36" fill-opacity="1"/>
+<use href="#s" x="992" y="204" width="56" height="56" fill="#2a2e36" fill-opacity="1"/>
+<use href="#s" x="1072" y="204" width="56" height="56" fill="#63c383" fill-opacity="0.6"/>
+<use href="#s" x="1152" y="204" width="56" height="56" fill="#2a2e36" fill-opacity="1"/>
+<use href="#s" x="752" y="284" width="56" height="56" fill="#2a2e36" fill-opacity="1"/>
+<use href="#s" x="832" y="284" width="56" height="56" fill="#2a2e36" fill-opacity="1"/>
+<use href="#s" x="912" y="284" width="56" height="56" fill="#2a2e36" fill-opacity="1"/>
+<use href="#s" x="992" y="284" width="56" height="56" fill="#e67373" fill-opacity="0.6"/>
+<use href="#s" x="1072" y="284" width="56" height="56" fill="#2a2e36" fill-opacity="1"/>
+<use href="#s" x="1152" y="284" width="56" height="56" fill="#63c383" fill-opacity="0.6"/>
+<use href="#s" x="752" y="364" width="56" height="56" fill="#2a2e36" fill-opacity="1"/>
+<use href="#s" x="832" y="364" width="56" height="56" fill="#63c383" fill-opacity="0.6"/>
+<use href="#s" x="912" y="364" width="56" height="56" fill="#63c383" fill-opacity="0.6"/>
+<use href="#s" x="992" y="364" width="56" height="56" fill="#2a2e36" fill-opacity="1"/>
+<use href="#s" x="1072" y="364" width="56" height="56" fill="#2a2e36" fill-opacity="1"/>
+<use href="#s" x="1152" y="364" width="56" height="56" fill="#2a2e36" fill-opacity="1"/>
+<use href="#s" x="752" y="444" width="56" height="56" fill="#2a2e36" fill-opacity="1"/>
+<use href="#s" x="832" y="444" width="56" height="56" fill="#2a2e36" fill-opacity="1"/>
+<use href="#s" x="912" y="444" width="56" height="56" fill="#2a2e36" fill-opacity="1"/>
+<use href="#s" x="992" y="444" width="56" height="56" fill="#2a2e36" fill-opacity="1"/>
+<use href="#s" x="1072" y="444" width="56" height="56" fill="#2a2e36" fill-opacity="1"/>
+<use href="#s" x="1152" y="444" width="56" height="56" fill="#2a2e36" fill-opacity="1"/>
+<use href="#s" x="752" y="524" width="56" height="56" fill="#2a2e36" fill-opacity="1"/>
+<use href="#s" x="832" y="524" width="56" height="56" fill="#2a2e36" fill-opacity="1"/>
+<use href="#s" x="912" y="524" width="56" height="56" fill="#2a2e36" fill-opacity="1"/>
+<use href="#s" x="992" y="524" width="56" height="56" fill="#2a2e36" fill-opacity="1"/>
+<use href="#s" x="1072" y="524" width="56" height="56" fill="#2a2e36" fill-opacity="1"/>
+<use href="#s" x="1152" y="524" width="56" height="56" fill="#2a2e36" fill-opacity="1"/>
+<svg x="96" y="168" width="72" height="72" viewBox="0 -960 960 960"><path fill="#63c383" d="m438-338 226-226-57-57-169 169-84-84-57 57 141 141Zm42 258q-139-35-229.5-159.5T160-516v-244l320-120 320 120v244q0 152-90.5 276.5T480-80Zm0-84q104-33 172-132t68-220v-189l-240-90-240 90v189q0 121 68 220t172 132Zm0-316Z"/></svg>
+<text x="90" y="350" font-family="Adwaita Sans" font-weight="600" font-size="104" letter-spacing="-2" fill="#eaecf0">lynis-widget</text>
+<text x="96" y="410" font-family="Adwaita Sans" font-size="28" fill="#6e7480">Lynis hardening scores as a card</text>
+<text x="96" y="448" font-family="Adwaita Sans" font-size="28" fill="#6e7480">for Dynacat and Glance dashboards</text>
+</svg>

@@ -1,0 +1,9 @@
+# Writes the widget's summary after each Lynis run. Run Lynis however you
+# already do (cron, a timer, by hand), then start this, or add it as
+# ExecStartPost= to your Lynis unit.
+[Unit]
+Description=Summarise the latest Lynis report for the dashboard widget
+
+[Service]
+Type=oneshot
+ExecStart=/usr/local/bin/lynis_widget.py summarize

@@ -1,0 +1,36 @@
+# The widget server as a rootless Podman Quadlet, in place of
+# lynis-widget.service; README.md has the install steps. Lynis and summarize
+# still run as root on each host, because the audit reads the whole system.
+# On SELinux hosts, label the summaries' folder for containers once, as root:
+#   chcon -R -t container_file_t /var/lib/lynis-widget
+[Unit]
+Description=Lynis widget for Dynacat and Glance
+After=network-online.target
+Wants=network-online.target
+
+[Container]
+ContainerName=lynis-widget
+Image=docker.io/library/python:3.12-slim
+AutoUpdate=registry
+Exec=python /app/lynis_widget.py serve --dir /data --bind 0.0.0.0 --port 8121
+# An init as PID 1 passes podman's SIGTERM on to Python, which ignores it as PID 1.
+PodmanArgs=--init
+# No User=: root in a rootless container is your own unprivileged user.
+# Only this machine; a dashboard in another container reaches it as described
+# in README.md.
+PublishPort=127.0.0.1:8121:8121
+Volume=%h/lynis-widget/lynis_widget.py:/app/lynis_widget.py:ro,z
+Volume=/var/lib/lynis-widget:/data:ro
+#Environment=LYNIS_WIDGET_TOKEN=...   (or EnvironmentFile=, to keep it out of the unit)
+ReadOnly=true
+DropCapability=all
+NoNewPrivileges=true
+
+[Service]
+Restart=on-failure
+RestartSec=15
+# Python ends on SIGTERM with exit 143 when stopped: a stop, not a failure
+SuccessExitStatus=143
+
+[Install]
+WantedBy=default.target
