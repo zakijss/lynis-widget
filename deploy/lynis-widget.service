@@ -1,0 +1,18 @@
+# The widget server. Runs as an unprivileged user: it only reads the
+# summaries, which summarize writes readable by anyone.
+[Unit]
+Description=Lynis widget for Dynacat and Glance
+After=network.target
+
+[Service]
+DynamicUser=yes
+ExecStart=/usr/local/bin/lynis_widget.py serve --dir /var/lib/lynis-widget --bind 127.0.0.1 --port 8121
+# Environment=LYNIS_WIDGET_TOKEN=...   (or EnvironmentFile=, to keep it out of the unit)
+Restart=on-failure
+NoNewPrivileges=yes
+ProtectSystem=strict
+ProtectHome=yes
+PrivateTmp=yes
+
+[Install]
+WantedBy=multi-user.target
