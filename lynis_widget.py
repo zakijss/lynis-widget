@@ -19,7 +19,7 @@ import sys
 import time
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 
-VERSION = "1.1.0"
+VERSION = "1.2.0"
 REPORT = "/var/log/lynis-report.dat"
 PROFILE = "/etc/lynis/custom.prf"
 OUT = "/var/lib/lynis-widget"
