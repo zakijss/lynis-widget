@@ -7,6 +7,7 @@ lynis-widget's own code is under the MIT licence in `LICENSE`. This file lists e
 | What | Version | Where | Source | Copyright | Licence |
 |---|---|---|---|---|---|
 | Material Symbols Outlined, "shield" and "verified_user" icons | | drawn into `docs/banner.svg` and `docs/banner.png` | https://github.com/google/material-design-icons | Google LLC | Apache License 2.0, text below |
+| Poly Haven assets: Potted Plant 02, Ceramic Vase 01, Walnut Veneer and Painted Plaster Wall, and the Kiara Interior HDRI | | rendered into `docs/render-hero.webp` and `docs/render-close.webp` | https://polyhaven.com | Rico Cilliers, James Ray Cock, Jenelle van Heerden, Amal Kumar, Greg Zaal | CC0 1.0 (public domain dedication) |
 
 Lynis itself is not included. It is a CISOfy project under the GPL 3.0; lynis-widget only reads the report it writes.
 

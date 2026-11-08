@@ -12,7 +12,10 @@ extension widget for [Dynacat](https://github.com/panonim/dynacat) and
 hardening index, how it moved since the last run, and the warnings and
 suggestions Lynis found, each with the fix Lynis suggests.
 
-![The widget in a dark dashboard with three made-up hosts: nas at 70 (down 2) with its warnings and suggestions open, pi at 63, web at 81 (up 5)](docs/screenshot-card.png)
+![A 3D render of a desk monitor showing a dark dashboard with the Lynis widget: three made-up hosts, db-01 at 74 (down 2) with its warnings and suggestions open, edge-01 at 61, web-01 at 84 (up 5)](docs/render-hero.webp)
+
+<sub>The picture above is a 3D render with a real screenshot of the widget on the
+monitor. The plain screenshots are under [Features](#features).</sub>
 
 It is one Python file with no dependencies beyond the standard library.
 
@@ -26,6 +29,13 @@ It is one Python file with no dependencies beyond the standard library.
 - Several hosts in one widget, from one folder of summaries.
 - An optional bearer token, a link from the title, and `/health`, which
   answers `ok` for monitoring.
+
+In a dark and a light theme, with made-up hosts:
+
+<p align="center">
+  <img src="docs/screenshot-dark.png" alt="The widget in a dark dashboard: db-01 at 74, down 2, fair, with two warnings and four suggestions open; edge-01 at 61, weak; web-01 at 84, up 5, good" width="49%">
+  <img src="docs/screenshot-light.png" alt="The same dashboard in a light theme, where the widget uses its darker set of status colours" width="49%">
+</p>
 
 ## How it works
 
@@ -171,6 +181,8 @@ the layout are up to you. A flat folder of `<host>-<date>.json` files, as
 `summarize` writes them, works; so does one subfolder per host. For each host
 it shows the newest summary and the change from the one before it.
 
+![A closer 3D render of the monitor: three host cards in one widget, each with its score, grade icon and change since the run before](docs/render-close.webp)
+
 One way to collect them is a cron job or timer on each audited host that pushes
 its summaries to the dashboard host:
 
@@ -251,5 +263,6 @@ requests and the changelog.
 
 MIT; see [LICENSE](LICENSE). Lynis is a CISOfy project under the GPL; this
 widget only reads the report it writes. The banner's icons are from Google's
-Material Symbols, under the Apache License 2.0;
-[THIRD-PARTY.md](THIRD-PARTY.md) lists them with the licence text.
+Material Symbols, under the Apache License 2.0, and the renders use Poly
+Haven's CC0 models and textures; [THIRD-PARTY.md](THIRD-PARTY.md) lists them,
+with the Apache licence text.
