@@ -18,9 +18,9 @@ It is one Python file with no dependencies beyond the standard library.
 
 ## Features
 
-- One card per host: the hardening index out of 100 (green from 80, neutral
-  from 65, red below), the change since the previous run, the OS, the number
-  of tests and how long ago the audit ran.
+- One card per host: the hardening index out of 100 with an icon for its
+  grade (good from 80, fair from 65, weak below), the change since the
+  previous run, the OS, the number of tests and how long ago the audit ran.
 - Warnings, suggestions and accepted tests open as lists, each warning and
   suggestion with Lynis's suggested fix.
 - Several hosts in one widget, from one folder of summaries.
@@ -180,6 +180,23 @@ rsync -a /var/lib/lynis-widget/ dashboard:/var/lib/lynis-widget/
 
 `summarize` keeps the newest `--keep` files per host in its own `--out` folder
 and leaves other hosts' files alone, so pushing into a shared folder is safe.
+
+## Colours
+
+The card brings its own status colours: teal for good, amber for fair
+and red for weak, with a set for dark themes and a darker one for light themes
+(`light: true`). Each reads at 4.5:1 or better on a widget background, and
+each grade has its own icon (a tick, a triangle, a cross), so the colour is
+never the only sign. To use your theme's colours instead, set the three tokens
+in your dashboard's custom CSS:
+
+```css
+.lynis-widget {
+  --lynis-ok: var(--color-positive);
+  --lynis-warn: var(--color-text-highlight);
+  --lynis-bad: var(--color-negative);
+}
+```
 
 ## Security
 

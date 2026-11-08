@@ -174,11 +174,35 @@ def load(folder):
     return out
 
 
+# Status colours as named tokens, one set per scheme, each 4.5:1 or better on a
+# widget background (dark: 9 to 22% lightness, light: 90 to 100%) and apart
+# under red-green and blue-yellow colour blindness. :where() keeps them easy to
+# override from a dashboard's custom CSS. Each grade has an icon as well.
+STYLE = """<style>
+:where(.lynis-widget){--lynis-ok:#4ff5c4;--lynis-warn:#ffc94b;--lynis-bad:#ff7c8a}
+:where(:root[data-scheme=light] .lynis-widget){--lynis-ok:#037465;--lynis-warn:#964d09;--lynis-bad:#7f0d2e}
+.lynis-widget .lw-ok{color:var(--lynis-ok)}
+.lynis-widget .lw-warn{color:var(--lynis-warn)}
+.lynis-widget .lw-bad{color:var(--lynis-bad)}
+.lynis-widget .lw-icon{display:inline-block;width:.85em;height:.85em;margin-right:.35em;vertical-align:-.06em;fill:none;
+stroke:currentColor;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}
+.lynis-widget .lw-index{font-variant-numeric:tabular-nums;white-space:nowrap}
+@media (prefers-reduced-motion:reduce){.lynis-widget .summary::after{transition:none}}
+</style>"""
+
+# grade: (token class, word, icon); the icon's shape tells the grades apart without colour
+GRADES = {
+    "good": ("lw-ok", "good", '<circle cx="12" cy="12" r="9.5"/><path d="m7.5 12.5 3 3 6-6.5"/>'),
+    "fair": ("lw-warn", "fair", '<path d="M12 3.2 2.6 19.8h18.8Z"/><path d="M12 10v4.2M12 17.2v.1"/>'),
+    "weak": ("lw-bad", "weak", '<path d="M8.1 2.6h7.8l5.5 5.5v7.8l-5.5 5.5H8.1l-5.5-5.5V8.1Z"/><path d="m9 9 6 6m0-6-6 6"/>'),
+}
+
+
 def grade(index):
-    """Dynacat colour class for a hardening index."""
+    """good from 80, fair from 65, weak below; None without an index."""
     if index is None:
-        return "color-subdue"
-    return "color-positive" if index >= 80 else "color-highlight" if index >= 65 else "color-negative"
+        return None
+    return "good" if index >= 80 else "fair" if index >= 65 else "weak"
 
 
 def when(started):
@@ -201,8 +225,8 @@ def findings(label, items, cls):
         f'<li><span class="{cls}">{e(i.get("id", ""))}</span> {e(i.get("text", ""))}'
         + (f'<div class="color-subdue size-h6">{e(i["solution"])}</div>' if i.get("solution") else "")
         + "</li>" for i in items)
-    return (f'<details class="margin-top-5"><summary class="size-h5">{label}</summary>'
-            f'<ul class="list list-gap-8 margin-top-5 size-h6">{rows}</ul></details>')
+    return (f'<details class="details margin-top-5"><summary class="summary size-h5">{label}</summary>'
+            f'<ul class="list list-gap-8 size-h6">{rows}</ul></details>')
 
 
 def render(hosts):
@@ -217,22 +241,32 @@ def render(hosts):
         delta = ""
         if prev and idx is not None and prev.get("index") is not None and idx != prev["index"]:
             d = idx - prev["index"]
-            delta = f' <span class="{"color-positive" if d > 0 else "color-negative"}">{"+" if d > 0 else ""}{d}</span>'
+            sign = "+" if d > 0 else "\u2212"   # a real minus sign
+            delta = (f' <span class="{"lw-ok" if d > 0 else "lw-bad"}" title="since the run before">'
+                     f'{sign}{abs(d)}<span class="visually-hidden"> since the run before</span></span>')
+        g = grade(idx)
+        if g:
+            cls, word, icon = GRADES[g]
+            score = (f'<span class="lw-index size-h1 {cls}" title="Lynis hardening index, out of 100: {word}">'
+                     f'<svg class="lw-icon" viewBox="0 0 24 24" aria-hidden="true">{icon}</svg>{idx}'
+                     f'<span class="visually-hidden"> out of 100, {word}</span>{delta}</span>')
+        else:
+            score = '<span class="lw-index size-h1 color-subdue" title="No hardening index in this report">?</span>'
         age = f'<span data-dynamic-relative-time="{ts}"></span> ago' if ts else e(s.get("date", ""))
         meta = " · ".join(x for x in (e(s.get("os", "")), f'{e(str(s.get("tests") or "?"))} tests', age) if x)
         w, sg, acc = s.get("warnings") or [], s.get("suggestions") or [], s.get("accepted") or []
-        counts = (f'<span class="{"color-negative" if w else "color-subdue"}">{plural(len(w), "warning")}</span>'
+        counts = (f'<span class="{"lw-bad" if w else "color-subdue"}">{plural(len(w), "warning")}</span>'
                   f' · {plural(len(sg), "suggestion")}' + (f' · {len(acc)} accepted' if acc else ""))
         cards.append(
             '<li><div class="flex justify-between items-center">'
             f'<span class="size-h3 color-highlight">{e(host)}</span>'
-            f'<span class="size-h1 {grade(idx)}" title="Lynis hardening index, out of 100">{idx if idx is not None else "?"}{delta}</span>'
+            + score +
             f'</div><div class="size-h6 color-subdue">{meta}</div><div class="size-h5 margin-top-5">{counts}</div>'
-            + findings(plural(len(w), "warning"), w, "color-negative")
+            + findings(plural(len(w), "warning"), w, "lw-bad")
             + findings(plural(len(sg), "suggestion"), sg, "color-primary")
             + findings(f"{len(acc)} accepted on purpose",
                        [{"id": a.get("id", ""), "text": a.get("reason", "")} for a in acc], "color-subdue") + "</li>")
-    return f'<ul class="list list-gap-20 list-with-separator">{"".join(cards)}</ul>'
+    return f'{STYLE}<ul class="lynis-widget list list-gap-20 list-with-separator">{"".join(cards)}</ul>'
 
 
 class Handler(BaseHTTPRequestHandler):
@@ -320,8 +354,9 @@ def self_test():
         write(dict(s, host="box-2"), d, 5)
         out = render(hosts)
         assert f'data-dynamic-relative-time="{s["time"]}"' in out
-        assert "color-positive" in out and "+4" in out and "1 warning<" in out and "3 suggestions" in out, out
-        assert "color-negative" in out                      # other's 55
+        assert "lw-ok" in out and "+4" in out and "1 warning<" in out and "3 suggestions" in out, out
+        assert "lw-bad" in out and "out of 100, weak" in out   # other's 55, said in words too
+        assert out.count("<style>") == 1 and "--lynis-ok" in out
         assert "1 accepted on purpose" in out and ">X-1<" in out
         for i in range(7):
             write(dict(s, date=f"2026-09-0{i + 1}"), d, 3)
@@ -351,7 +386,9 @@ def self_test():
     out = render({"h": (evil, None)})
     assert "<script>" not in out and "<img" not in out and "&lt;img" in out
     assert "No Lynis summaries yet" in render({})
-    assert grade(None) == "color-subdue" and grade(80) == "color-positive" and grade(64) == "color-negative"
+    assert grade(None) is None and grade(80) == "good" and grade(79) == "fair" and grade(64) == "weak"
+    drop = render({"h": (dict(s, index=70), dict(s, index=72))})
+    assert "\u22122" in drop and "lw-bad" in drop and "out of 100, fair" in drop
     one = [{"id": "X-1", "text": "t"}]
     assert ">1 warning<" in findings(plural(1, "warning"), one, "c") and plural(2, "warning") == "2 warnings"
     print("self-test ok")
